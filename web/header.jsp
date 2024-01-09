@@ -9,12 +9,14 @@
 </header>
         <% 
             String nombreUser = (String) request.getSession().getAttribute("nombreUser");
-
+if(nombreUser == null){
+    response.sendRedirect("login.jsp");
+}
         %>
 <nav class="navegacion">
     <!--BLOQUE-->
     <a class="navegacion__link navegacion__link--activo" href="index.jsp">Tienda</a>
     <a class="navegacion__link" href="nosotros.jsp">Nosotros</a>
     <a class="navegacion__link" href=""><%=nombreUser%></a>
-     
+    <a class="navegacion__link" href="SvLogout">Cerrar sesion</a>
 </nav>

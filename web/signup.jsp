@@ -52,13 +52,13 @@
                 
             </form>
             
-            <h1>Ver lista de usuarios</h1>
+<!--            <h1>Ver lista de usuarios</h1>
             <p>Para ver los datos haga click</p>
             <form action="SvLogin" method="POST">
                 <button type="submit" >
                     Mostrar usuarios
                 </button>
-            </form>
+            </form>-->
             
         </div>
         </main>

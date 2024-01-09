@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <%@include file="header.html" %>
+    <%@include file="header.jsp" %>
 
     <main class="contenedor">
         <div class="headimg">
