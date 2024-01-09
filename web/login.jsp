@@ -28,7 +28,7 @@
         <main class="contenedor">
             <div id="contacto" class="contacto">
             <h1>¡Bienvenid@!</h1>
-            <form class="formulariolog" action="#" method="POST">
+            <form class="formulariolog" action="SvLogin" method="GET">
                 <div class="contenedor-campos">
                     <div class="campo w-100">
                         <label>Usuario / Correo</label>

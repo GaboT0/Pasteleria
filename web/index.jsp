@@ -26,12 +26,12 @@
 </head>
 
 <body>
-    <%@include file="header.html" %>
-
+    <%@include file="header.jsp" %>
+    
     <main class="contenedor">
         <div class="headimg">
         </div>
-        <p class="">¡Bienvenid@ a la Resposteria Delicias! En nuestra pastelería, cada delicia está hecha para despertar tus sentidos y endulzar tu día. Sumérgete en un mundo de sabores exquisitos y texturas irresistibles, donde cada bocado es una experiencia única!</p>
+        <p class="">¡Bienvenid@ <%=nombreUser%> a la Resposteria Delicias! En nuestra pastelería, cada delicia está hecha para despertar tus sentidos y endulzar tu día. Sumérgete en un mundo de sabores exquisitos y texturas irresistibles, donde cada bocado es una experiencia única!</p>
         
         <div class="grid">
             <div class="producto">

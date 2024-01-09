@@ -28,7 +28,7 @@
         <main class="contenedor">
             <div id="contacto" class="contacto">
             <h1>Registrarse</h1>
-            <form class="formulariolog" action="SvUsuarios" method="POST">
+            <form class="formulariolog" action="SvLogin" method="POST">
                 <div class="contenedor-campos">
                     <div class="campo w-100">
                         <label>Nombre de usuario</label>
@@ -54,7 +54,7 @@
             
             <h1>Ver lista de usuarios</h1>
             <p>Para ver los datos haga click</p>
-            <form action="SvUsuarios" method="GET">
+            <form action="SvLogin" method="POST">
                 <button type="submit" >
                     Mostrar usuarios
                 </button>
