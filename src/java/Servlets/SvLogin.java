@@ -37,14 +37,13 @@ public class SvLogin extends HttpServlet {
         Consultas cons = new Consultas();
         String userResp = cons.autenticacion(user, pass);
         if(userResp != null){
-            response.sendRedirect("index.jsp"); 
-                HttpSession misesion = request.getSession();
-                misesion.setAttribute("nombreUser",userResp); 
+            HttpSession misesion = request.getSession();
+            misesion.setAttribute("nombreUser",userResp);
+            response.sendRedirect("index.jsp");  
         }else{
             response.sendRedirect("login.jsp");
         }
  
-
         processRequest(request, response);
     }
 

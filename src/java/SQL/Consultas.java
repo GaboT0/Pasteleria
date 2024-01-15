@@ -6,6 +6,9 @@ package SQL;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.List;
+import logic.Pastel;
 
 /**
  *
@@ -13,8 +16,8 @@ import java.sql.ResultSet;
  */
 public class Consultas extends connect{
     public static void main(String[] args) {
-        Consultas cons = new Consultas();
-        System.out.println(cons.registrarUser("Gab123","gab123@gmail.com", "1234"));
+        //Consultas cons = new Consultas();
+        //System.out.println(cons.getPastelById(5).getNombre());
     }
     public String autenticacion(String user,String pass){
         PreparedStatement pst = null;
@@ -85,6 +88,83 @@ public class Consultas extends connect{
                     }
                 }
         return false;
+    }
+
+    public List<Pastel> getAllPasteles(){
+        List<Pastel> pasteles = new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try{
+            String consulta = "SELECT * FROM pasteles";
+            pst = getConexion().prepareStatement(consulta);
+            rs = pst.executeQuery();
+           while(rs.next()){
+                Pastel p = new Pastel(0,"",0);
+                p.setId_pastel(rs.getInt("id_pastel"));
+                p.setNombre(rs.getString("nombre"));
+                p.setPrecio(rs.getInt("precio"));
+                pasteles.add(p);
+            }
+            return pasteles;
+
+        }catch(Exception e){
+            System.out.println("ERROR: "+ e);
+        }finally{
+            try{
+                if(getConexion() != null){
+                    getConexion().close();
+                }
+                if(pst != null){
+                    pst.close();
+                }
+                if(rs != null){
+                    rs.close();
+                }
+            }catch(Exception e){
+                System.out.println("ERROR:CONEXION: ");
+            }
+        }
+
+        return null;
+    }
+    public Pastel getPastelById(int idPastel){
+        Pastel p = new Pastel(0,"",0);
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try{
+            String consulta = "SELECT * FROM pasteles WHERE id_pastel = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, idPastel);
+            
+            rs = pst.executeQuery();
+
+            if(rs.absolute(1)){
+                p.setId_pastel(rs.getInt("id_pastel"));
+                p.setNombre(rs.getString("nombre")); 
+                p.setPrecio(rs.getInt("precio")); 
+                return p;
+            }else{
+                return null;
+            }
+
+        }catch(Exception e){
+            System.out.println("ERROR: "+ e);
+        }finally{
+            try{
+                if(getConexion() != null){
+                    getConexion().close();
+                }
+                if(pst != null){
+                    pst.close();
+                }
+                if(rs != null){
+                    rs.close();
+                }
+            }catch(Exception e){
+                System.out.println("ERROR:CONEXION: ");
+            }
+        }
+        return null;
     }
 
 }

@@ -4,6 +4,7 @@
     Author     : chino
 --%>
 
+<%@page import="logic.Pastel"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -22,14 +23,21 @@
 
 <body>
     <%@include file="header.jsp" %>
-
+<% 
+            Pastel pastel = (Pastel) request.getSession().getAttribute("pastel");
+            
+//            if(pastel == null){
+//                response.sendRedirect("index.jsp");
+//            }
+           
+        %>
+    
     <main class="contenedor">
-        <h1>React JS</h1>
+        <h1><%=pastel.getNombre()%></h1>
         <div class="camisa">
-            <img class="camisa__imagen" src="img/1.jpg" alt="img_producto">
+            <img class="camisa__imagen" src="img/<%=pastel.getId_pastel()%>.jpg" alt="img_producto">
             <div class="camisa__contenido">
-                <p>латыни из колледжа Hampden-Sydney, штат Вирджиния, взял одно из самых странных слов в Lorem Ipsum,
-                    "consectetur", и</p>
+                <p>FALTA DESCRIPCION AGREGAR A LA BASE DE DATOS</p>
 
                 <form class="formulario">
                     <select class="formulario__campo" name="" id="">

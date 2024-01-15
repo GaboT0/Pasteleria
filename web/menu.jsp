@@ -4,6 +4,9 @@
     Author     : chino
 --%>
 
+<%@page import="java.util.Date"%>
+<%@page import="logic.Pastel"%>
+<%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,117 +30,129 @@
         <div class="headimg">
         </div>
         <h1>Nuestras delicias</h1>
-
+        
         <div class="grid">
-            <div class="producto">
-                <a href="producto.jsp">
-                    <img class="producto__img" src="img/1.jpg" alt="imagen-camisa">
-                    <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
-                        <p class="producto__precio">$25</p>
+             <% 
+            List<Pastel> pasteles = (List) request.getSession().getAttribute("pasteles");
+            
+            if(pasteles == null){
+                response.sendRedirect("index.jsp");
+}
+            for(Pastel us : pasteles){
 
+        %>
+       
+        <a href="SvPasteles?id=<%=us.getId_pastel() %>">
+            <div class="producto">
+                
+                    <img class="producto__img" src="img/<%=us.getId_pastel() %>.jpg" alt="imagen-pastel">
+                    <div class="producto__info">
+                        <p class="producto__nombre"><%=us.getNombre() %></p>
+                        <p class="producto__precio"> <%="$"+us.getPrecio() %></p>
                     </div>
                     <!--CLASE producto_info-->
-                </a>
+               
             </div>
-            <!--CLASE producto-->
+        </a>
+             <%
+            }
+        %>
+            <!--
             <div class="producto">
                 <a href="producto.jsp">
                     <img class="producto__img" src="img/2.jpg" alt="imagen-camisa">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
+                        <p class="producto__nombre">Pastel de chocolate 2</p>
                         <p class="producto__precio">$25</p>
-
                     </div>
-                    <!--CLASE producto_info-->
+                    
                 </a>
             </div>
-            <!--CLASE producto-->
-            <!--CLASE grid-->
+           
             <div class="producto">
                 <a href="producto.jsp">
                     <img class="producto__img" src="img/3.jpg" alt="imagen-camisa">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
+                        <p class="producto__nombre">Pastel con hojuelas</p>
                         <p class="producto__precio">$25</p>
 
                     </div>
-                    <!--CLASE producto_info-->
+                  
                 </a>
             </div>
-            <!--CLASE producto-->
+           
             <div class="producto">
                 <a href="producto.jsp">
                     <img class="producto__img" src="img/4.jpg" alt="imagen-camisa">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
+                        <p class="producto__nombre">Pastel de chocolate 3</p>
                         <p class="producto__precio">$25</p>
 
                     </div>
-                    <!--CLASE producto_info-->
+                  
                 </a>
             </div>
-            <!--CLASE producto-->
+            
             <div class="producto">
                 <a href="producto.jsp">
                     <img class="producto__img" src="img/5.jpg" alt="imagen-camisa">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
+                        <p class="producto__nombre">Pastel frutos rojos c/n galletas</p>
                         <p class="producto__precio">$25</p>
 
                     </div>
-                    <!--CLASE producto_info-->
+                    
                 </a>
             </div>
-            <!--CLASE producto-->
+           
             <div class="producto">
                 <a href="producto.jsp">
                     <img class="producto__img" src="img/6.jpg" alt="imagen-camisa">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
+                        <p class="producto__nombre">Pastel frutos rojos</p>
                         <p class="producto__precio">$25</p>
 
                     </div>
-                    <!--CLASE producto_info-->
+                   
                 </a>
             </div>
-            <!--CLASE producto-->
+            
             <div class="producto">
                 <a href="producto.jsp">
                     <img class="producto__img" src="img/7.jpg" alt="imagen-camisa">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
+                        <p class="producto__nombre">Pastel elegante fresa</p>
                         <p class="producto__precio">$25</p>
 
                     </div>
-                    <!--CLASE producto_info-->
+                   
                 </a>
             </div>
-            <!--CLASE producto-->
+           
             <div class="producto">
                 <a href="producto.jsp">
                     <img class="producto__img" src="img/8.jpg" alt="imagen-camisa">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
+                        <p class="producto__nombre">Pastel fresa cumpleaños</p>
                         <p class="producto__precio">$25</p>
 
                     </div>
-                    <!--CLASE producto_info-->
+                    
                 </a>
             </div>
-            <!--CLASE producto-->
+            
             <div class="producto">
                 <a href="producto.jsp">
                     <img class="producto__img" src="img/9.jpg" alt="imagen-camisa">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
+                        <p class="producto__nombre">Pastel de chocolate 4</p>
                         <p class="producto__precio">$25</p>
 
                     </div>
-                    <!--CLASE producto_info-->
+                    
                 </a>
             </div>
-            <!--CLASE producto-->
+            -->
 
             
 

@@ -15,8 +15,9 @@ if(nombreUser == null){
         %>
 <nav class="navegacion">
     <!--BLOQUE-->
-    <a class="navegacion__link navegacion__link--activo" href="index.jsp">Tienda</a>
+    <a class="navegacion__link" href="index.jsp">Tienda</a>
     <a class="navegacion__link" href="nosotros.jsp">Nosotros</a>
-    <a class="navegacion__link" href=""><%=nombreUser%></a>
-    <a class="navegacion__link" href="SvLogout">Cerrar sesion</a>
+    <a class="navegacion__link" href="SvPasteles">Menu</a>
+    <a class="navegacion__account" href=""><%=nombreUser%></a>
+    <a class="navegacion__close" href="SvLogout">Cerrar sesion</a>
 </nav>
