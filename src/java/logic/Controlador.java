@@ -13,12 +13,12 @@ import persistencia.ControladorPersistencia;
  */
 public class Controlador {
     ControladorPersistencia controlPers = new ControladorPersistencia();
-
-    public void crearUsuario (Usuario usu){
-        controlPers.crearUsuario(usu);
-    }
-
-    public List<Usuario> trearUsuarios(){
-        return controlPers.traerUsuario();
-    }
+//
+//    public void crearUsuario (Usuario usu){
+//        controlPers.crearUsuario(usu);
+//    }
+//
+//    public List<Usuario> trearUsuarios(){
+//        return controlPers.traerUsuario();
+//    }
 }

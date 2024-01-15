@@ -31,7 +31,7 @@ public class SvUsuarios extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
                 List<Usuario> listaUsers = new ArrayList<>();
-                listaUsers = control.trearUsuarios();
+                //listaUsers = control.trearUsuarios();
 
                 HttpSession misesion = request.getSession();
                 misesion.setAttribute("listaUsers",listaUsers);
@@ -52,7 +52,7 @@ public class SvUsuarios extends HttpServlet {
                 usu.setNombre(nombre);
                 usu.setEmail(email);
                 usu.setContrasena(contrasena);
-                control.crearUsuario(usu);
+                //control.crearUsuario(usu);
     
                 response.sendRedirect("signup.jsp");   
 
