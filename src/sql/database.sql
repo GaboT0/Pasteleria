@@ -1,11 +1,15 @@
 CREATE DATABASE IF NOT EXISTS pasteleria;
 USE pasteleria;
-CREATE TABLE usuarios (
+DROP TABLE USUARIO;
+CREATE TABLE usuario (
 id_user INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 nombre VARCHAR(200) NOT NULL,
-email VARCHAR (200) NOT NULL
+email VARCHAR (200) NOT NULL,
+contrasena VARCHAR (30) NOT NULL
 );
-
+SELECT * FROM usuario;
+SELECT * FROM usuario WHERE (NOMBRE = 'GABO123' OR EMAIL = 'GABO123') AND CONTRASENA = '1234';
+INSERT INTO USUARIO (nombre, email, contrasena) VALUES ('Gabo','gabo@gmail.com','1234');
 -- CREATE TABLE pasteles(
 
 -- );
