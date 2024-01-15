@@ -35,11 +35,11 @@
         
         <div class="grid">
             <div class="producto">
-                <a href="producto.jsp">
-                    <img class="producto__img" src="img/1.jpg" alt="imagen-camisa">
+                <a href="SvPasteles?id=1">
+                    <img class="producto__img" src="img/1.jpg" alt="imagen-pastel">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
-                        <p class="producto__precio">$25</p>
+                        <p class="producto__nombre">Pastel de chocolate 1</p>
+                        <p class="producto__precio">$300</p>
 
                     </div>
                     <!--CLASE producto_info-->
@@ -48,10 +48,10 @@
             <!--CLASE producto-->
             <div class="producto">
                 <a href="producto.jsp">
-                    <img class="producto__img" src="img/2.jpg" alt="imagen-camisa">
+                    <img class="producto__img" src="img/2.jpg" alt="imagen-pastel">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
-                        <p class="producto__precio">$25</p>
+                        <p class="producto__nombre">Pastel de chocolate 2</p>
+                        <p class="producto__precio">$300</p>
 
                     </div>
                     <!--CLASE producto_info-->
@@ -61,10 +61,10 @@
             <!--CLASE grid-->
             <div class="producto">
                 <a href="producto.jsp">
-                    <img class="producto__img" src="img/3.jpg" alt="imagen-camisa">
+                    <img class="producto__img" src="img/3.jpg" alt="imagen-pastel">
                     <div class="producto__info">
-                        <p class="producto__nombre">Pastel</p>
-                        <p class="producto__precio">$25</p>
+                        <p class="producto__nombre">Pastel hojuelas</p>
+                        <p class="producto__precio">$300</p>
 
                     </div>
                     <!--CLASE producto_info-->
@@ -72,7 +72,7 @@
             </div>
             
             <div class="centrarg">
-                <a href="menu.jsp" class="boton">Ver más</a>
+                <a href="SvPasteles" class="boton">Ver más</a>
             </div>
         </div>
        

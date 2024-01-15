@@ -82,11 +82,26 @@ h3{font-size: 2.7rem;}
     font-size: 3rem;
     /*margin-right: 2rem;    la forma anterior para separar  tiene mayor soporte en navegadores web*/
 }
+.navegacion__account{
+    font-family: var(--fuente-principal);
+    color: var(--blanco);
+    font-size: 1.5rem;
+    /*margin-right: 2rem;    la forma anterior para separar  tiene mayor soporte en navegadores web*/
+}
+.navegacion__close{
+    font-family: var(--fuente-principal);
+    color: var(--blanco);
+    font-size: 1.5rem;
+    /*margin-right: 2rem;    la forma anterior para separar  tiene mayor soporte en navegadores web*/
+}
+.navegacion__close:hover{
+    color: var(--secundario);
+}
 
-.navegacion__link--activo,
 .navegacion__link:hover{
     color: var(--secundario);
 }
+
 
 .footer{
     background-color: var(--primario);
@@ -103,7 +118,7 @@ h3{font-size: 2.7rem;}
 /* HEADER IMG*/
 .headimg{
     background-image: url(../img/banner.jpg);
-    height: 60rem; /*tamaño de la imagem*/
+    height: 40rem; /*tamaño de la imagem*/
     background-repeat: no-repeat;/*No repite la imagen en el fondo*/
     background-size: cover; /*cubre todo el fondo */
     background-position: center center ; /*centra la imagen al fondo incluso cuando tiene la pantalla mas pequeña*/
@@ -134,7 +149,6 @@ h3{font-size: 2.7rem;}
 }
 
 .producto__img{
-
 }
 
 
@@ -386,3 +400,4 @@ h3{font-size: 2.7rem;}
     font-size: 1.2rem;
     border:none;
 }
+
