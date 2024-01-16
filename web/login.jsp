@@ -1,8 +1,3 @@
-<%-- 
-    Document   : login
-    Created on : 20/12/2023, 01:58:41 PM
-    Author     : chino
---%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>

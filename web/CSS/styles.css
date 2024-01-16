@@ -118,7 +118,7 @@ h3{font-size: 2.7rem;}
 /* HEADER IMG*/
 .headimg{
     background-image: url(../img/banner.jpg);
-    height: 40rem; /*tamaño de la imagem*/
+    height: 30rem; /*tamaño de la imagem*/
     background-repeat: no-repeat;/*No repite la imagen en el fondo*/
     background-size: cover; /*cubre todo el fondo */
     background-position: center center ; /*centra la imagen al fondo incluso cuando tiene la pantalla mas pequeña*/

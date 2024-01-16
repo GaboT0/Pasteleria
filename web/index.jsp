@@ -34,45 +34,45 @@
         <p class="">¡Bienvenid@ <%=nombreUser%> a la Resposteria Delicias! En nuestra pastelería, cada delicia está hecha para despertar tus sentidos y endulzar tu día. Sumérgete en un mundo de sabores exquisitos y texturas irresistibles, donde cada bocado es una experiencia única!</p>
         
         <div class="grid">
-            <div class="producto">
-                <a href="SvPasteles?id=1">
-                    <img class="producto__img" src="img/1.jpg" alt="imagen-pastel">
-                    <div class="producto__info">
-                        <p class="producto__nombre">Pastel de chocolate 1</p>
-                        <p class="producto__precio">$300</p>
+            <a href="SvPasteles?id=1">
+                <div class="producto">
 
-                    </div>
-                    <!--CLASE producto_info-->
+                        <img class="producto__img" src="img/1.jpg" alt="imagen-pastel">
+                        <div class="producto__info">
+                            <p class="producto__nombre">Pastel de chocolate 1</p>
+                            <!--<p class="producto__precio">$300</p>-->
+
+                        </div>
+                        <!--CLASE producto_info-->
+                </div>
                 </a>
-            </div>
             <!--CLASE producto-->
-            <div class="producto">
-                <a href="producto.jsp">
-                    <img class="producto__img" src="img/2.jpg" alt="imagen-pastel">
-                    <div class="producto__info">
-                        <p class="producto__nombre">Pastel de chocolate 2</p>
-                        <p class="producto__precio">$300</p>
-
-                    </div>
-                    <!--CLASE producto_info-->
-                </a>
-            </div>
+             <a href="SvPasteles?id=2">
+                <div class="producto">
+                        <img class="producto__img" src="img/2.jpg" alt="imagen-pastel">
+                        <div class="producto__info">
+                            <p class="producto__nombre">Pastel de chocolate 2</p>
+                            <!--<p class="producto__precio">$300</p>-->
+                        </div>
+                        <!--CLASE producto_info-->
+                </div>
+                 </a>
             <!--CLASE producto-->
             <!--CLASE grid-->
-            <div class="producto">
-                <a href="producto.jsp">
-                    <img class="producto__img" src="img/3.jpg" alt="imagen-pastel">
-                    <div class="producto__info">
-                        <p class="producto__nombre">Pastel hojuelas</p>
-                        <p class="producto__precio">$300</p>
+            <a href="SvPasteles?id=3">
+                <div class="producto">
 
-                    </div>
-                    <!--CLASE producto_info-->
+                        <img class="producto__img" src="img/3.jpg" alt="imagen-pastel">
+                        <div class="producto__info">
+                            <p class="producto__nombre">Pastel hojuelas</p>
+                            <!--<p class="producto__precio">$300</p>-->
+                        </div>
+                        <!--CLASE producto_info-->
+                </div>
                 </a>
-            </div>
             
             <div class="centrarg">
-                <a href="SvPasteles" class="boton">Ver más</a>
+                <a href="SvPasteles?id=menu" class="boton">Ver más</a>
             </div>
         </div>
        

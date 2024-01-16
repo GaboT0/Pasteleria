@@ -8,12 +8,15 @@ package logic;
 public class Pastel {
     private int id_pastel;
     private String nombre;
-    private int precio;
+    private int stock;
 
-    public Pastel(int id_pastel, String nombre, int precio) {
+    public Pastel(int id_pastel, String nombre, int stock) {
         this.id_pastel = id_pastel;
         this.nombre = nombre;
-        this.precio = precio;
+        this.stock = stock;
+    }
+    public Pastel() {
+        
     }
 
     public int getId_pastel() {
@@ -32,13 +35,15 @@ public class Pastel {
         this.nombre = nombre;
     }
 
-    public int getPrecio() {
-        return precio;
+    public int getStock() {
+        return stock;
     }
 
-    public void setPrecio(int precio) {
-        this.precio = precio;
+    public void setStock(int stock) {
+        this.stock = stock;
     }
+
+   
 
    
 
