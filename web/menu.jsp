@@ -38,6 +38,16 @@
             if(pasteles == null){
                 response.sendRedirect("index.jsp");
 }
+             %>
+            <%
+                if(request.getParameter("stock") != null){
+                    String stock = (String) request.getParameter("stock");
+                    if(Integer.parseInt(stock) == 1){
+                    
+            %>
+            <script> alert("STOCK AGOTADO PARA ESTE PASTEL"); </script>
+            <% } } %>
+        <%
             for(Pastel us : pasteles){
 
         %>
@@ -48,10 +58,8 @@
                     <img class="producto__img" src="img/<%=us.getId_pastel() %>.jpg" alt="imagen-pastel">
                     <div class="producto__info">
                         <p class="producto__nombre"><%=us.getNombre() %></p>
-                        <p class="producto__precio"> <%="$"+us.getPrecio() %></p>
                     </div>
                     <!--CLASE producto_info-->
-               
             </div>
         </a>
              <%

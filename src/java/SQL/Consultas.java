@@ -9,6 +9,7 @@ import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 import logic.Pastel;
+import logic.Usuario;
 
 /**
  *
@@ -19,7 +20,7 @@ public class Consultas extends connect{
         //Consultas cons = new Consultas();
         //System.out.println(cons.getPastelById(5).getNombre());
     }
-    public String autenticacion(String user,String pass){
+    public Usuario autenticacion(String user,String pass){
         PreparedStatement pst = null;
         ResultSet rs = null;
         try{
@@ -31,9 +32,11 @@ public class Consultas extends connect{
             rs = pst.executeQuery();
 
             if(rs.absolute(1)){
-                String nombre = rs.getString("nombre");
+                Usuario usuario = new Usuario();
+                usuario.setId_user(rs.getInt("id_user"));  
+                usuario.setNombre(rs.getString("nombre"));
                 System.out.println("AUTENTICACION EXITOSA");
-                return nombre;
+                return usuario;
             }
 
         }catch(Exception e){
@@ -99,10 +102,10 @@ public class Consultas extends connect{
             pst = getConexion().prepareStatement(consulta);
             rs = pst.executeQuery();
            while(rs.next()){
-                Pastel p = new Pastel(0,"",0);
+                Pastel p = new Pastel();
                 p.setId_pastel(rs.getInt("id_pastel"));
                 p.setNombre(rs.getString("nombre"));
-                p.setPrecio(rs.getInt("precio"));
+                p.setStock(rs.getInt("stock"));
                 pasteles.add(p);
             }
             return pasteles;
@@ -128,7 +131,7 @@ public class Consultas extends connect{
         return null;
     }
     public Pastel getPastelById(int idPastel){
-        Pastel p = new Pastel(0,"",0);
+        Pastel p = new Pastel();
         PreparedStatement pst = null;
         ResultSet rs = null;
         try{
@@ -141,7 +144,7 @@ public class Consultas extends connect{
             if(rs.absolute(1)){
                 p.setId_pastel(rs.getInt("id_pastel"));
                 p.setNombre(rs.getString("nombre")); 
-                p.setPrecio(rs.getInt("precio")); 
+                p.setStock(rs.getInt("stock")); 
                 return p;
             }else{
                 return null;
