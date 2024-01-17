@@ -11,6 +11,8 @@ contrasena VARCHAR (30) NOT NULL
 SELECT * FROM usuario;
 SELECT * FROM usuario WHERE (NOMBRE = 'GABO123' OR EMAIL = 'GABO123') AND CONTRASENA = '1234';
 INSERT INTO USUARIO (nombre, email, contrasena) VALUES ('Gabo','gabo@gmail.com','1234');
+
+DROP TABLE pasteles;
 CREATE TABLE pasteles(
 id_pastel INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 nombre VARCHAR(200) NOT NULL,
@@ -21,12 +23,15 @@ INSERT INTO pasteles (nombre, stock) VALUES ('Pastel de chocolate 1',30);
 INSERT INTO pasteles (nombre, stock) VALUES ('Pastel de chocolate 2',8);
 INSERT INTO pasteles (nombre, stock) VALUES ('Pastel hojuelas',2);
 INSERT INTO pasteles (nombre, stock) VALUES ('Pastel de chocolate 3',5);
-INSERT INTO pasteles (nombre, stock) VALUES ('Pastel galleta',30);
+INSERT INTO pasteles (nombre, stock) VALUES ('Pastel galleta',0);
 INSERT INTO pasteles (nombre, stock) VALUES ('Pastel frutos rojos',30);
 INSERT INTO pasteles (nombre, stock) VALUES ('Pastel fresa 1',3);
 INSERT INTO pasteles (nombre, stock) VALUES ('Pastel fresa 2',10);
 INSERT INTO pasteles (nombre, stock) VALUES ('Pastel de chocolate 4',20);
 INSERT INTO pasteles (nombre, stock) VALUES ('Pastel helado',10);
+
+UPDATE pasteles SET stock = '10' WHERE id_pastel = '1';
+UPDATE pasteles SET stock = 3 WHERE id_pastel = 3;
 SELECT * FROM pasteles;
 SELECT * FROM pasteles where id_pastel = 1;
 
@@ -46,7 +51,7 @@ FOREIGN KEY(id_user) REFERENCES usuario(id_user)
 INSERT INTO carrito (id_pastel,id_user,cantidad,precio,tamanio,subtotal) VALUES (1,1,2,300,'Chico',600);
 INSERT INTO carrito (id_pastel,id_user,cantidad,precio,tamanio,subtotal) VALUES (1,1,1,800,'Grande',800); -- compras del usuario 1
 SELECT * FROM carrito;
-SELECT c.cantidad,c.precio,c.tamanio,c.subtotal,p.nombre,p.stock,u.nombre FROM carrito c 
+SELECT c.id_carrito,c.id_pastel,c.id_user,c.cantidad,c.precio,c.tamanio,c.subtotal,p.nombre FROM carrito c 
 JOIN pasteles p ON (c.id_pastel = p.id_pastel)
 JOIN usuario u ON (c.id_user = u.id_user)
 WHERE c.id_user = u.id_user;
