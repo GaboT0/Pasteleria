@@ -19,6 +19,7 @@ if(nombreUser == null){
     <a class="navegacion__link" href="nosotros.jsp">Nosotros</a>
     <a class="navegacion__link" href="SvPasteles?id=menu">Menu</a>
     <a class="navegacion__link" href="SvPasteles?id=irCarrito">Carrito</a>
+    <a class="navegacion__link" href="SvPasteles?id=historial">Historial</a>
     <a class="navegacion__account" href=""><%=nombreUser%></a>
     <a class="navegacion__close" href="SvLogout">Cerrar sesion</a>
 </nav>

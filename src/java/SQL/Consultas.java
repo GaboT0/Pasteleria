@@ -8,8 +8,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
+import logic.Carrito;
+import logic.Direccion;
 import logic.Pastel;
 import logic.Usuario;
+import logic.Historial;
 
 /**
  *
@@ -201,5 +204,105 @@ public class Consultas extends connect{
         return false;
     }
 
+    public boolean realizarCompra(List<Carrito> carrito, Direccion dir,int total){
+        PreparedStatement pst = null;
+         try{
+                    String consulta = "INSERT INTO carrito (id_pastel,id_user,cantidad,precio,tamanio,subtotal,total,nombre,calle,numExt,numInt,colonia,delegacion,cp,metodo_pago) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+
+                    for(Carrito carr : carrito){
+                        pst = getConexion().prepareStatement(consulta);
+                        pst.setInt(1, carr.getId_pastel());
+                        pst.setInt(2, carr.getId_user());
+                        pst.setInt(3, carr.getCantidad());
+                        pst.setInt(4, carr.getPrecio());
+                        pst.setString(5, carr.getTamanio());
+                        pst.setInt(6, carr.getSubtotal());
+                        pst.setInt(7, total);
+                        pst.setString(8, dir.getNombre());
+                        pst.setString(9, dir.getCalle());
+                        pst.setInt(10, dir.getNumExt());
+                        pst.setInt(11, dir.getNumInt());
+                        pst.setString(12, dir.getColonia());
+                        pst.setString(13, dir.getDelegacion());
+                        pst.setInt(14, dir.getCp());
+                        pst.setString(15, dir.getMetodo_pago());
+
+
+                        if(pst.executeUpdate() == 1){
+                            System.out.println("REGISTRO EXITOSO");
+
+                        }
+                        pst = null;
+                    }
+                    return true;
+                }catch(Exception e){
+                    System.out.println("ERROR: "+e);
+                }finally{
+                    try{
+                        if(getConexion() != null){
+                            getConexion().close();
+                        }
+                        if(pst != null){
+                            pst.close();
+                        }
+                    }catch(Exception e){
+                        System.out.println("ERROR:CONEXION: ");
+                    }
+                }
+        return false;
+    }
+
+    public List<Historial> getHistorial(int idUser){
+        List<Historial> historial = new ArrayList<>();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+        try{
+            String consulta = "SELECT c.id_pastel,p.nombre AS nombre_pastel,c.cantidad,c.precio,c.tamanio,c.subtotal,c.total,c.nombre,c.calle,c.numExt,c.numInt,c.colonia,c.delegacion,c.cp,c.metodo_pago FROM carrito c JOIN pasteles p ON (c.id_pastel = p.id_pastel) where c.id_user = ?";
+            pst = getConexion().prepareStatement(consulta);
+            pst.setInt(1, idUser);
+            rs = pst.executeQuery();
+
+           while(rs.next()){
+                Historial h = new Historial();
+                h.setId_pastel(rs.getInt("id_pastel"));
+                h.setNombrePastel(rs.getString("nombre_pastel"));
+                h.setCantidad(rs.getInt("cantidad"));
+                h.setPrecio(rs.getInt("precio"));
+                h.setTamanio(rs.getString("tamanio"));
+                h.setSubtotal(rs.getInt("subtotal"));
+                h.setTotal(rs.getInt("total"));
+                h.setNombre(rs.getString("nombre"));
+                h.setCalle(rs.getString("calle"));
+                h.setNumExt(rs.getInt("numExt"));
+                h.setNumInt(rs.getInt("numInt"));
+                h.setColonia(rs.getString("colonia"));
+                h.setDelegacion(rs.getString("delegacion"));
+                h.setCp(rs.getInt("cp"));
+                h.setMetodo_pago(rs.getString("metodo_pago"));
+                
+                historial.add(h);
+            }
+            return historial;
+
+        }catch(Exception e){
+            System.out.println("ERROR: "+ e);
+        }finally{
+            try{
+                if(getConexion() != null){
+                    getConexion().close();
+                }
+                if(pst != null){
+                    pst.close();
+                }
+                if(rs != null){
+                    rs.close();
+                }
+            }catch(Exception e){
+                System.out.println("ERROR:CONEXION: ");
+            }
+        }
+
+        return null;
+    }
 }
 
