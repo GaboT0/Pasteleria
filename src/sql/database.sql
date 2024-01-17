@@ -67,22 +67,22 @@ JOIN pasteles p ON (c.id_pastel = p.id_pastel) where c.id_user = 2;
 
 
 
-SELECT c.id_carrito,c.id_pastel,c.id_user,c.cantidad,c.precio,c.tamanio,c.subtotal,p.nombre FROM carrito c 
-JOIN pasteles p ON (c.id_pastel = p.id_pastel)
-JOIN usuario u ON (c.id_user = u.id_user)
-WHERE c.id_user = u.id_user;
+-- SELECT c.id_carrito,c.id_pastel,c.id_user,c.cantidad,c.precio,c.tamanio,c.subtotal,p.nombre FROM carrito c 
+-- JOIN pasteles p ON (c.id_pastel = p.id_pastel)
+-- JOIN usuario u ON (c.id_user = u.id_user)
+-- WHERE c.id_user = u.id_user;
 
 
-DROP TABLE historial;
-CREATE TABLE historial (
-id_historial INT NOT NULL AUTO_INCREMENT PRIMARY KEY
+-- DROP TABLE historial;
+-- CREATE TABLE historial (
+-- id_historial INT NOT NULL AUTO_INCREMENT PRIMARY KEY
 
-);
-INSERT INTO historial (id_carrito,id_user,total) VALUES (1,2,1100);
-INSERT INTO historial (id_carrito,id_user,total) VALUES (1,2,600);
-SELECT h.id_user,h.total,c.precio,c.cantidad,c.tamanio,c.subtotal,p.nombre,p.stock FROM historial h
-JOIN carrito c ON (h.id_carrito = c.id_carrito)
-JOIN pasteles p ON (c.id_pastel = p.id_pastel) where h.id_user = 1;
+-- );
+-- INSERT INTO historial (id_carrito,id_user,total) VALUES (1,2,1100);
+-- INSERT INTO historial (id_carrito,id_user,total) VALUES (1,2,600);
+-- SELECT h.id_user,h.total,c.precio,c.cantidad,c.tamanio,c.subtotal,p.nombre,p.stock FROM historial h
+-- JOIN carrito c ON (h.id_carrito = c.id_carrito)
+-- JOIN pasteles p ON (c.id_pastel = p.id_pastel) where h.id_user = 1;
 
 
 
