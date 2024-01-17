@@ -15,6 +15,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import logic.Carrito;
+import logic.Direccion;
+import logic.Historial;
 import logic.Pastel;
 
 public class SvPasteles extends HttpServlet {
@@ -198,6 +200,50 @@ public class SvPasteles extends HttpServlet {
                         response.sendRedirect("carrito.jsp?stock=1");
                     }
                 }
+            break;
+            case "irDireccion":
+                if(request.getParameter("totalAll") != null){
+                    int totalAll = Integer.parseInt(request.getParameter("totalAll"));
+                    misesion.setAttribute("totalAll", totalAll);
+                    response.sendRedirect("direccion.jsp");
+                }
+            break;
+            case "comprar":
+                if(misesion.getAttribute("carrito") != null){
+                    List<Carrito> carritos = new ArrayList<>();
+                    carritos = (List<Carrito>) misesion.getAttribute("carrito");
+                    int totalAll = Integer.parseInt(misesion.getAttribute("totalAll").toString());
+                    String nombre = request.getParameter("nombre");
+                    String calle = request.getParameter("calle");
+                    int numExt = Integer.parseInt(request.getParameter("numExt"));
+                    int numInt = Integer.parseInt(request.getParameter("numInt"));
+                    String colonia = request.getParameter("colonia");
+                    String delegacion = request.getParameter("deleg");
+                    int cp = Integer.parseInt(request.getParameter("cp"));
+                    String mPago = request.getParameter("metodopago");
+                    Direccion dir = new Direccion();
+                    dir.setNombre(nombre);
+                    dir.setCalle(calle);
+                    dir.setNumExt(numExt);
+                    dir.setNumInt(numInt);
+                    dir.setColonia(colonia);
+                    dir.setDelegacion(delegacion);
+                    dir.setCp(cp);
+                    dir.setMetodo_pago(mPago);
+                    System.out.println(cons.realizarCompra(carritos, dir, totalAll));
+                    carritos = new ArrayList<>();
+                    misesion.setAttribute("carrito", carritos);
+
+                    response.sendRedirect("index.jsp?compra=1");
+                }
+            break;  
+            case "historial":
+                Object us = misesion.getAttribute("idUser");
+                int idUser = Integer.parseInt(us.toString());
+                List<Historial> histo = new ArrayList<>();
+                histo = cons.getHistorial(idUser);
+                misesion.setAttribute("historial", histo);
+                response.sendRedirect("historial.jsp");
             break;
             default:
                 int id = Integer.parseInt(request.getParameter("id"));

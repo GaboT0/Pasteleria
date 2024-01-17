@@ -65,7 +65,7 @@ if(compras.size() != 0){
         
         <div class="camisa" style="margin:1rem">
             <input class="formulario__campo" id="totalall" name="totalall" value="<%="TOTAL: "+totalAll%>" disabled >
-            <a href=""><input class="formulario__submit" type="submit" value="COMPRAR"></a>
+            <a href="SvPasteles?id=irDireccion&totalAll=<%=totalAll%>"><input class="formulario__submit" type="submit" value="COMPRAR"></a>
         </div>
 <%
 }

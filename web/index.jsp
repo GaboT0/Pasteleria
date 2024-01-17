@@ -26,7 +26,21 @@
 </head>
 
 <body>
+     <% 
+            
+        if(request.getParameter("compra") != null){
+            String compra = (String) request.getParameter("compra");
+            if(Integer.parseInt(compra) == 1){
+                    
+            %>
+            <script> alert("GRACIAS POR TU COMPRA!! C:"); </script>
+                    <% 
+            }
+        }
+%>
     <%@include file="header.jsp" %>
+    
+    
     
     <main class="contenedor">
         <div class="headimg">
