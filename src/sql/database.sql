@@ -62,7 +62,7 @@ INSERT INTO carrito (id_pastel,id_user,cantidad,precio,tamanio,subtotal,total,no
 INSERT INTO carrito (id_pastel,id_user,cantidad,precio,tamanio,subtotal,total,nombre,calle,numExt,numInt,colonia,delegacion,cp,metodo_pago) VALUES (1,1,1,300,'Chico',300,900,'Gabo','calle 2',321,0,'colonia 1','delegacion 1',01260,'Efectivo');
 
 SELECT * FROM carrito where id_user = 1;
-SELECT c.id_pastel,p.nombre,c.cantidad,c.precio,c.tamanio,c.subtotal,c.total,c.nombre,c.calle,c.numExt,c.numInt,c.colonia,c.delegacion,c.cp,c.metodo_pago FROM carrito c 
+SELECT c.id_pastel,p.nombre AS nombre_pastel,c.cantidad,c.precio,c.tamanio,c.subtotal,c.total,c.nombre,c.calle,c.numExt,c.numInt,c.colonia,c.delegacion,c.cp,c.metodo_pago FROM carrito c 
 JOIN pasteles p ON (c.id_pastel = p.id_pastel) where c.id_user = 2;
 
 
