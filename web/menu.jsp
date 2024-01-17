@@ -34,10 +34,10 @@
         <div class="grid">
              <% 
             List<Pastel> pasteles = (List) request.getSession().getAttribute("pasteles");
-            
+            Pastel pa = (Pastel) request.getSession().getAttribute("pastel");
             if(pasteles == null){
                 response.sendRedirect("index.jsp");
-}
+            }
              %>
             <%
                 if(request.getParameter("stock") != null){
@@ -45,8 +45,17 @@
                     if(Integer.parseInt(stock) == 1){
                     
             %>
-            <script> alert("STOCK AGOTADO PARA ESTE PASTEL"); </script>
-            <% } } %>
+            <script> alert("STOCK INSUFICIENTE PARA ESTE PASTEL - DISPONIBLES: <%=pa.getStock()%> "); </script>
+                    <% 
+                    } 
+                    if(Integer.parseInt(stock) == 2){
+                                %>
+            <script> alert("Ingrese todos lo datos porfavor"); </script>
+                    <% 
+                        }
+                }
+                    
+                    %>
         <%
             for(Pastel us : pasteles){
 

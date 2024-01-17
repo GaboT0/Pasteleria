@@ -1,3 +1,4 @@
+<%@page import="logic.Pastel"%>
 <%@page import="java.util.List"%>
 <%@page import="logic.Carrito"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -18,13 +19,19 @@
         <%@include file="header.jsp" %>
         <% 
             List<Carrito> compras = (List<Carrito>) request.getSession().getAttribute("carrito");
+            Pastel pa = (Pastel) request.getSession().getAttribute("pastelEdit");
             int index = 0;
-//            if(compras == null){
-//                response.sendRedirect("index.jsp");
-//            }
-           
-        %>
-        
+            int totalAll = 0;
+                if(request.getParameter("stock") != null){
+                    String stock = (String) request.getParameter("stock");
+                    if(Integer.parseInt(stock) == 1){
+                    
+            %>
+            <script> alert("STOCK INSUFICIENTE PARA ESTE PASTEL - DISPONIBLES: <%=pa.getStock()%> "); </script>
+                    <% 
+                    }
+                }
+%>
         <h1>Carrito de compras</h1>
         <%
             for(Carrito comp : compras){
@@ -40,7 +47,7 @@
                     <input class="formulario__campo" id="total" name="total" disabled  value="<%="Subtotal: $"+comp.getSubtotal()%>" >
                     
                     
-                    <a href="SvPasteles?id=quitarCarrito&index=<%=index%>"><input class="formulario__submit" type="submit" value="Quitar del carrito"></a>
+                    <a href="SvPasteles?id=quitarCarrito&index=<%=index%>&idPastel=<%=comp.getId_pastel()%>&cant=<%=comp.getCantidad()%>"><input class="formulario__submit" type="submit" value="Quitar del carrito"></a>
                     <a href="SvPasteles?id=irEditar&index=<%=index%>"><input class="formulario__submit" type="submit" value="Editar"></a>
                 </div>
                 <!--</form>-->
@@ -48,11 +55,22 @@
         </div>
                     <%
                         index +=1;
+                        totalAll += comp.getSubtotal();
             }
+
+if(compras.size() != 0){
+
+
         %>
         
-        
-        
+        <div class="camisa" style="margin:1rem">
+            <input class="formulario__campo" id="totalall" name="totalall" value="<%="TOTAL: "+totalAll%>" disabled >
+            <a href=""><input class="formulario__submit" type="submit" value="COMPRAR"></a>
+        </div>
+<%
+}
+
+%>        
         
         
       

@@ -38,49 +38,65 @@ public class SvPasteles extends HttpServlet {
             break;
 
             case "anadirCarro":
-                Object us = misesion.getAttribute("idUser");
-                Pastel past = (Pastel) misesion.getAttribute("pastel");
-                System.out.println(Integer.parseInt(us.toString()));
-                int idPastel = Integer.parseInt(request.getParameter("idPastel"));
-                System.out.println("idPastel:" + idPastel);
-                int tamanio = Integer.parseInt(request.getParameter("tamanio"));
-                System.out.println("tamanio" + tamanio);
-                String tamString = "null";
-                Pastel p = cons.getPastelById(idPastel);
-                if(p.getStock() != 0){
-                    if(tamanio == 300)
-                        tamString = "Chico";
-                    if(tamanio == 500)
-                        tamString = "Mediano";
-                    if(tamanio == 800)
-                        tamString = "Grande";
-                    System.out.println(tamString);
-                    String cantidad = request.getParameter("cantidad");
-                    int subtotal = tamanio * Integer.parseInt(cantidad);
-                    System.out.println(""+tamanio+" "+cantidad +" "+subtotal);
-                    Carrito compra = new Carrito();
-                    compra.setId_pastel(idPastel);
-                    compra.setId_user(Integer.parseInt(us.toString()));
-                    compra.setCantidad(Integer.parseInt(cantidad));
-                    compra.setPrecio(tamanio);
-                    compra.setTamanio(tamString);
-                    compra.setSubtotal(subtotal);
-                    compra.setNombrePastel(past.getNombre());
-                    List<Carrito> carritos = new ArrayList<>();
-                    if(misesion.getAttribute("carrito") != null){
-                        carritos = (List<Carrito>) misesion.getAttribute("carrito"); 
-                        carritos.add(compra);
-                        misesion.setAttribute("carrito", carritos);
-                        response.sendRedirect("carrito.jsp");
+                if(request.getParameter("idPastel") != null && request.getParameter("tamanio")!= null && request.getParameter("cantidad") != null){
+                    Object us = misesion.getAttribute("idUser");
+                    Pastel past = (Pastel) misesion.getAttribute("pastel");
+                    System.out.println(Integer.parseInt(us.toString()));
+                    int idPastel = Integer.parseInt(request.getParameter("idPastel"));
+                    System.out.println("idPastel:" + idPastel);
+                    int tamanio = Integer.parseInt(request.getParameter("tamanio"));
+                    System.out.println("tamanio" + tamanio);
+                    String tamString = "null";
+                    Pastel p = cons.getPastelById(idPastel);
+                    cons = new Consultas();
+                    if(p.getStock() != 0){
+                        int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+                        int stk = p.getStock()- cantidad;
+                        System.out.println("STOCK:" +stk);
+                        if(stk >= 0){
+                            if(tamanio == 300)
+                                tamString = "Chico";
+                            if(tamanio == 500)
+                                tamString = "Mediano";
+                            if(tamanio == 800)
+                                tamString = "Grande";
+                            System.out.println(tamString);
+
+                            int subtotal = tamanio * cantidad;
+                            System.out.println(""+tamanio+" "+cantidad +" "+subtotal);
+                            Carrito compra = new Carrito();
+                            compra.setId_pastel(idPastel);
+                            compra.setId_user(Integer.parseInt(us.toString()));
+                            compra.setCantidad(cantidad);
+                            compra.setPrecio(tamanio);
+                            compra.setTamanio(tamString);
+                            compra.setSubtotal(subtotal);
+                            compra.setNombrePastel(past.getNombre());
+                            List<Carrito> carritos = new ArrayList<>();
+                            if(misesion.getAttribute("carrito") != null){
+                                carritos = (List<Carrito>) misesion.getAttribute("carrito"); 
+                                carritos.add(compra);
+                                misesion.setAttribute("carrito", carritos);
+                                boolean edit = cons.modStock(idPastel, stk);
+                                System.out.println("STOCK MOD? " + edit);
+                                response.sendRedirect("carrito.jsp");
+                            }else{
+                                carritos.add(compra);
+                                misesion.setAttribute("carrito", carritos);
+                                boolean edit = cons.modStock(idPastel, stk);
+                                System.out.println("STOCK MOD? " + edit);
+                                response.sendRedirect("carrito.jsp");
+                            }
+                        }else{
+                            response.sendRedirect("menu.jsp?stock=1");
+                        }   
                     }else{
-                        carritos.add(compra);
-                        misesion.setAttribute("carrito", carritos);
-                        response.sendRedirect("carrito.jsp");
+                        response.sendRedirect("menu.jsp?stock=1");
                     }
-                    
                 }else{
-                    response.sendRedirect("menu.jsp?stock=1");
+                    response.sendRedirect("menu.jsp?stock=2");
                 }
+                
                 
             break;
             case "irCarrito": 
@@ -101,9 +117,15 @@ public class SvPasteles extends HttpServlet {
                     List<Carrito> carritos = new ArrayList<>();
                     carritos = (List<Carrito>) misesion.getAttribute("carrito");
                     int index = Integer.parseInt(request.getParameter("index"));
+                    int idPa = Integer.parseInt(request.getParameter("idPastel"));
+                    int cant = Integer.parseInt(request.getParameter("cant"));
+                    Pastel pquitar = cons.getPastelById(idPa);
+                    int devolver = pquitar.getStock() + cant;
+                    cons = new Consultas();
                     System.out.println("Index " + index);
                     carritos.remove(index);
                     misesion.setAttribute("carrito", carritos);
+                    System.out.println(cons.modStock(idPa, devolver));
                     response.sendRedirect("carrito.jsp");
                 }
             break;
@@ -115,9 +137,66 @@ public class SvPasteles extends HttpServlet {
                     int index = Integer.parseInt(request.getParameter("index"));
                     System.out.println("Index " + index);
                     compra = carritos.get(index);
-                    
+                    misesion.setAttribute("indexEditar",index); 
                     misesion.setAttribute("compra",compra);   
                     response.sendRedirect("editarProducto.jsp");
+                }
+            break;
+            case "editarCarrito":
+                if(request.getSession().getAttribute("compra") != null){
+                    Carrito pastelAnterior = (Carrito) misesion.getAttribute("compra");
+                    int cantidadAnterior = pastelAnterior.getCantidad();
+                    int idPastel = Integer.parseInt(request.getParameter("idPastel"));
+                    int indx = Integer.parseInt(request.getParameter("index"));
+                    Pastel peditar = cons.getPastelById(idPastel);
+                    misesion.setAttribute("pastelEdit", peditar);
+                    cons = new Consultas();
+                    int stockActual = peditar.getStock();
+                    int tamanio = Integer.parseInt(request.getParameter("tamanio"));
+                    int cantidad = Integer.parseInt(request.getParameter("cantidad"));
+                    int diferencia = 0;
+                    int newStock = 0;
+                    if(cantidadAnterior < cantidad){//Si la cantidad anterior es menor se resta la diferencia a la BD
+                        diferencia = cantidad - cantidadAnterior;
+                        newStock = stockActual - diferencia;
+                    }
+                    if(cantidadAnterior > cantidad){//Si la cantidad anterior es mayor se añade la diferencia a la BD
+                        diferencia = cantidad - cantidadAnterior;
+                        newStock = stockActual - diferencia;
+                    }
+                    if(cantidadAnterior == cantidad){//Si es igual, no hay se hacen cambios en la BD
+                        diferencia = 0;
+                        newStock = stockActual;
+                    }
+                    if(newStock >= 0){
+                        String tamString = "";
+                        if(tamanio == 300)
+                            tamString = "Chico";
+                        if(tamanio == 500)
+                            tamString = "Mediano";
+                        if(tamanio == 800)
+                            tamString = "Grande";
+                        int subtotal = cantidad * tamanio;
+                        Object us = misesion.getAttribute("idUser");
+                        List<Carrito> carritos = new ArrayList<>();
+                        carritos = (List<Carrito>) misesion.getAttribute("carrito");
+                        carritos.remove(indx);
+                        Carrito pastelNuevo = new Carrito();
+                        pastelNuevo.setId_pastel(idPastel);
+                        pastelNuevo.setId_user(Integer.parseInt(us.toString()));
+                        pastelNuevo.setCantidad(cantidad);
+                        pastelNuevo.setNombrePastel(peditar.getNombre());
+                        pastelNuevo.setPrecio(tamanio);
+                        pastelNuevo.setSubtotal(subtotal);
+                        pastelNuevo.setTamanio(tamString);
+
+                        carritos.add(pastelNuevo);
+                        misesion.setAttribute("carrito", carritos);
+                        System.out.println(cons.modStock(idPastel, newStock));
+                        response.sendRedirect("SvPasteles?id=irCarrito");
+                    }else{
+                        response.sendRedirect("carrito.jsp?stock=1");
+                    }
                 }
             break;
             default:
@@ -138,8 +217,6 @@ public class SvPasteles extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException { 
 
-
-
         processRequest(request, response);
     }
 
@@ -147,11 +224,6 @@ public class SvPasteles extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        Consultas cons = new Consultas();
-//        String tamanio = request.getParameter("tamanio");
-//        String cantidad = request.getParameter("cantidad"); 
-//        String subtotal = request.getParameter("total"); 
-//        System.out.println(""+tamanio+" "+cantidad +" "+subtotal);
         
         processRequest(request, response);
     }

@@ -1,4 +1,3 @@
-
 let r = 19;
 let total = document.getElementById("total");
 //total.innerHTML = '<b>TOTAL:'+ r+'</b>';
@@ -6,6 +5,7 @@ let total = document.getElementById("total");
 function listenTam(){
     let precio = parseInt(document.getElementById("tamanio").value);
     let cantidad = parseInt(document.getElementById("cantidad").value);
+    console.log(cantidad);
     if (cantidad >20){
         document.getElementById("cantidad").value = 20;
         cantidad = 20;
@@ -22,3 +22,9 @@ function listenTam(){
     console.log(t);
     total.setAttribute("value","$"+t);
 }
+function selectValueTam(valor){
+    let element = document.getElementById('tamanio');
+    element.value = valor;
+    console.log("SETEANDO "+ valor);
+}
+    

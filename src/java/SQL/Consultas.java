@@ -170,5 +170,36 @@ public class Consultas extends connect{
         return null;
     }
 
+    public boolean modStock(int idPastel,int newStock){
+        PreparedStatement pst = null;
+         try{
+                    String consulta = "UPDATE pasteles SET stock = ? WHERE id_pastel = ?";
+                    pst = getConexion().prepareStatement(consulta);
+                    pst.setInt(1, newStock);
+                    pst.setInt(2, idPastel);
+                    
+
+                    if(pst.executeUpdate() == 1){
+                        System.out.println("REGISTRO EXITOSO");
+                        return true;
+                    }
+
+                }catch(Exception e){
+                    System.out.println("ERROR: "+e);
+                }finally{
+                    try{
+                        if(getConexion() != null){
+                            getConexion().close();
+                        }
+                        if(pst != null){
+                            pst.close();
+                        }
+                    }catch(Exception e){
+                        System.out.println("ERROR:CONEXION: ");
+                    }
+                }
+        return false;
+    }
+
 }
 

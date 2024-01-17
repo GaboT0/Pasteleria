@@ -21,7 +21,7 @@
 <% 
             
             Carrito pastel = (Carrito) request.getSession().getAttribute("compra");
-            
+            int index = Integer.parseInt(request.getSession().getAttribute("indexEditar").toString());
             if(pastel == null){
                 response.sendRedirect("index.jsp");
             }
@@ -35,9 +35,8 @@
             <div class="camisa__contenido">
                 
 
-                <form class="formulario" action="SvPasteles?id=anadirCarro&idPastel=<%=pastel.getId_pastel()%>" method="POST">
+                <form class="formulario" action="SvPasteles?id=editarCarrito&idPastel=<%=pastel.getId_pastel()%>&index=<%=index%>" method="POST">
                     <select onchange="listenTam()" class="formulario__campo" name="tamanio" id="tamanio">
-                        <option disabled value="null">--Selecionar tamaño</option>
                         <option value="300">Chico - $300</option>
                         <option value="500">Mediano - $500</option>
                         <option value="800">Grande - $800</option>
@@ -52,6 +51,9 @@
     </main>
            
     <%@include file="foot.html" %>
-    <script src="js/producto.js"></script>
+    <script src="js/editarProducto.js"></script>
+    <script>
+        selectValueTam('<%=pastel.getPrecio()%>');
+    </script>
     </body>
 </html>
